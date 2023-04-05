@@ -1,13 +1,34 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = 3000;
-app.use(express.static(path.join(__dirname, "Home")));
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Home/home.html'));
-//   res.send('Home/home.html');
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.get('/', async (req, res) => {
+  res.render('home');
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.get('/authentication', async (req, res) => {
+  res.render('authentication');
+});
+
+app.get('/bloodreport', async (req, res) => {
+  res.render('bloodreport');
+});
+
+app.get('/xrayreport', async (req, res) => {
+  res.render('xrayreport');
+});
+
+app.get('/recoveryreport', async (req, res) => {
+  res.render('recoveryreport');
+});
+app.get('/communitypoll', async (req, res) => {
+  res.render('communitypoll');
+});
+
+
+app.listen(3000, () => {
+  console.log('APP IS LISTENING ON PORT 3000!');
 });
